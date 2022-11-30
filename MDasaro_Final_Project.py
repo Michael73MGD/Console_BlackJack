@@ -20,6 +20,7 @@ class BlackJack():
         dealer_value, player_value = self.update_hands(dealer, player)
         Delay()
         print()
+        print('─' * 100)
         print("Dealer: ", end="")
         for card in dealer:
             print(card, "  ", end="")
@@ -32,7 +33,9 @@ class BlackJack():
         print()
         Delay()
         print("     Dealer Value: "+str(dealer_value), format("Player Value: "+str(player_value), "^30"),format("Current Bet: $"+str(bet)+"        Money: "+str(self.money), ">30"))
+        print('─' * 100)
         print()
+        Delay()
         #Include # of cards left in deck
         #Player value, dealer value, money, bet, # of games won? with good justifications
 
@@ -68,7 +71,9 @@ class BlackJack():
         self.betting(dealer, player, bet)
 
     def play_again(self):
-        print("You currently have $"+str(self.money))
+        Delay()
+        print("\nYou currently have $"+str(self.money))
+        Delay()
         again = input("Press 'return' to play again, or 'q' to quit. ")
         if len(again) == 0:
             self.play_game()
@@ -76,6 +81,7 @@ class BlackJack():
             exit()
 
     def betting(self, dealer, player, bet):
+        Delay()
         dealer_value, player_value = self.update_hands(dealer, player)
         bet_increase = input("Enter amount to increase bet or press 'return' to pass. ")
         
@@ -83,18 +89,21 @@ class BlackJack():
             try:
                 bet_increase_int = int(bet_increase)
             except:
-                print("Error, bet amount was not a number. ")
+                print("Error, bet amount was not a number. \n")
+                Delay()
+                self.betting(dealer, player, bet)
 
             if bet_increase_int <= (self.money-bet):
                 bet+=bet_increase_int
                 print("Bet successfully updated to $"+str(bet))
             else:
-                print("You can't increase your bet that much, you only have $"+str(self.money))
+                Delay()
+                print("You can't increase your bet that much, you only have $"+str(self.money)+"\n")
                 self.betting(dealer, player, bet)
         #self.print_info(dealer, player, bet)
 
         while True: 
-            decision = input("\nPress 'h' to hit or 'p' to pass. ")
+            decision = input("Press 'h' to hit or 'p' to pass. ")
             if decision == 'h':
                 hit = self.GameDeck.pop_card()
                 player.append(hit)
@@ -112,6 +121,7 @@ class BlackJack():
                 #show updated information
 
                 if player_value > 21:
+                    Delay()
                     print("BUST")
                     print("You lost your bet of $"+str(bet))
                     self.money -= bet
@@ -120,6 +130,7 @@ class BlackJack():
                 else:
                     continue
             elif decision == 'p':
+                Delay()
                 print("Passing, your total is "+ str(player_value)+". Let's see if you beat the dealer. ")
                 print()
                 while dealer_value < 17:
@@ -138,19 +149,23 @@ class BlackJack():
 
                         print("Dealer busted, you win by default! Your money has been increased. "+"\n")
                         self.money += bet
+                        Delay()
                         self.play_again()
                 #print("Dealer value must be between 17 and 21 I hope, it's: " + str(dealer_value))
                 #Display all information
                 self.print_info(dealer, player, bet)
 
                 if player_value > dealer_value:
+                    Delay()
                     print("Your value is higher than the dealer, you win! You money has been updated. ")
                     self.money += bet
                     self.play_again()
                 elif player_value == dealer_value:
+                    Delay()
                     print("You've tied in value with the dealer, your bet has been return to you. ")
                     self.play_again()
                 else:
+                    Delay()
                     print("The dealer has won, you've lost your bet. ")
                     self.money -= bet
                     self.play_again()

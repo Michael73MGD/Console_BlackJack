@@ -39,6 +39,9 @@ class Deck:
             j = random.randrange(0, n_cards)
             self.cards[i], self.cards[j] = self.cards[j], self.cards[i]
     def pop_card(self):
+        if self.is_empty():
+            print("\nDeck is empty, reshuffling...\n")
+            self.__init__()
         return self.cards.pop()
     def is_empty(self):
         return len(self.cards) == 0
