@@ -4,8 +4,10 @@ import time
 def Delay(t=0.5):
     time.sleep(t)
 
-name = input("Welcome to BlackJack, you start with $100 of chips, please enter your name: ")
-print("Hello "+name+", let's begin!")
+#name = input("Welcome to BlackJack, you start with $100 of chips, please enter your name: ")
+#print("Hello "+name+", let's begin!")
+
+print("Welcome to BlackJack, you start with $100, betting starts at $10")
 Delay()
 
 class BlackJack():
@@ -113,7 +115,7 @@ class BlackJack():
                 print("You received a ",end="")
                 print(hit) #get random new card
                 print()
-                Delay(1)
+                Delay()
                 
                 self.print_info(dealer, player, bet)
                 
